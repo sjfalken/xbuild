@@ -7,7 +7,9 @@ repository = "https://github.com/rust-mobile/xbuild"
 license = "Apache-2.0 OR MIT"
 
 [dependencies]
+# added due to upstream breaking with 0.3.40
 time = "=0.3.39"
+
 android-sdkmanager-rs = "0.5.0"
 anyhow = "1.0.68"
 apk = { version = "0.4.0", path = "../apk" }
