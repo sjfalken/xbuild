@@ -20,7 +20,7 @@ RUN apt-get -y install ideviceinstaller
 
 # WORKDIR /app/xbuild
 RUN cargo install --profile release --git https://github.com/sjfalken/xbuild --branch master --bin x xbuild
-RUN cargo install --profile release --git  https://github.com/indygreg/apple-platform-rs.git --bin rcodesign Dapple-codesign
+RUN cargo install --profile release --git  https://github.com/indygreg/apple-platform-rs.git --bin rcodesign apple-codesign
 # WORKDIR /app
 RUN wget https://apt.llvm.org/llvm.sh && bash ./llvm.sh
 RUN bash -c "ln -s -t /usr/local/bin /usr/lib/llvm-19/bin/*"
