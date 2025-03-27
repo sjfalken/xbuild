@@ -16,7 +16,7 @@ RUN apt-get -y install libimobiledevice6
 RUN apt-get -y install libimobiledevice-utils
 RUN apt-get -y install ideviceinstaller
 RUN apt-get -y install ruby-rubygems
-
+RUN apt-get -y install ruby-dev
 RUN cargo install --profile release --git https://github.com/sjfalken/xbuild --branch master --bin x xbuild
 
 RUN wget https://apt.llvm.org/llvm.sh && bash ./llvm.sh
