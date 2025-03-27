@@ -31,10 +31,10 @@ COPY Gemfile .
 
 RUN gem install bundler
 RUN bundle update
-ENV PRODUCE_COMPANY_NAME="Stefan Falkenstein"
+
 ENV LC_ALL=en_US.UTF-8
 ENV LANG=en_US.UTF-8
-RUN fastlane init
+
 
 
 
