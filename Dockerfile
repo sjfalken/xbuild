@@ -2,7 +2,7 @@ FROM rust:latest
 # ARG XBUILD_VERSION
 
 WORKDIR /setup
-COPY . .
+
 RUN apt-get update
 RUN apt-get -y install wget
 RUN apt-get -y install lsb-release
@@ -18,10 +18,13 @@ RUN apt-get -y install libimobiledevice-utils
 RUN apt-get -y install ideviceinstaller
 RUN apt-get -y install ruby-rubygems
 RUN apt-get -y install ruby-dev
-RUN cargo install --profile release --bin x xbuild
 
 RUN wget https://apt.llvm.org/llvm.sh && bash ./llvm.sh
 RUN bash -c "ln -s -t /usr/local/bin /usr/lib/llvm-19/bin/*"
+
+COPY . .
+RUN cargo install --profile release --bin x xbuild
+
 
 WORKDIR /app
 COPY Gemfile .
