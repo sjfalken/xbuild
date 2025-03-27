@@ -42,6 +42,10 @@ enum Commands {
         #[clap(flatten)]
         args: BuildArgs,
     },
+    BuildMin {
+        #[clap(flatten)]
+        args: BuildArgs,
+    },
     /// Run app on an attached device
     Run {
         #[clap(flatten)]
@@ -103,6 +107,10 @@ impl Commands {
             Self::Build { args } => {
                 let env = BuildEnv::new(args)?;
                 command::build(&env)?;
+            }
+            Self::BuildMin { args } => {
+                let env = BuildEnv::new(args)?;
+                command::build_min(&env)?;
             }
             Self::Run { args } => {
                 let env = BuildEnv::new(args)?;

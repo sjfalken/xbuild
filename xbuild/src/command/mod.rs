@@ -9,7 +9,10 @@ mod build;
 mod doctor;
 mod new;
 
+mod build_min;
+
 pub use build::build;
+pub use build_min::build_min;
 pub use doctor::doctor;
 pub use new::new;
 
