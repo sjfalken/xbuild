@@ -278,6 +278,9 @@ pub fn build(env: &BuildEnv) -> Result<()> {
                 ipa.finish()?;
             }
         }
+        Platform::IosSim => {
+            unimplemented!()
+        }
         Platform::Windows => {
             let target = env.target().compile_targets().next().unwrap();
             let arch_dir = platform_dir.join(target.arch().to_string());

@@ -44,6 +44,7 @@ impl std::fmt::Display for Opt {
 pub enum Platform {
     Android,
     Ios,
+    IosSim,
     Linux,
     Macos,
     Windows,
@@ -130,6 +131,8 @@ impl Format {
             (Platform::Android, _) => Self::Apk,
             (Platform::Ios, Opt::Debug) => Self::Appbundle,
             (Platform::Ios, Opt::Release) => Self::Ipa,
+            (Platform::IosSim, Opt::Debug) => Self::Appbundle,
+            (Platform::IosSim, Opt::Release) => Self::Ipa,
             (Platform::Linux, Opt::Debug) => Self::Appdir,
             (Platform::Linux, Opt::Release) => Self::Appimage,
             (Platform::Macos, Opt::Debug) => Self::Appbundle,
@@ -226,6 +229,7 @@ impl CompileTarget {
         Ok(match (self.arch, self.platform) {
             (Arch::Arm64, Platform::Android) => "aarch64-linux-android",
             (Arch::Arm64, Platform::Ios) => "aarch64-apple-ios",
+            (Arch::Arm64, Platform::IosSim) => "aarch64-apple-ios-sim",
             (Arch::Arm64, Platform::Linux) => "aarch64-unknown-linux-gnu",
             (Arch::Arm64, Platform::Macos) => "aarch64-apple-darwin",
             (Arch::X64, Platform::Android) => "x86_64-linux-android",
@@ -703,6 +707,19 @@ impl BuildEnv {
                     .as_ref()
                     .unwrap();
                 cargo.use_ios_sdk(&sdk, minimum_version)?;
+            }
+        }
+        if target.platform() == Platform::IosSim {
+            let sdk = self.ios_sdk();
+            if sdk.exists() {
+                let minimum_version = self
+                    .config()
+                    .ios()
+                    .info
+                    .minimum_os_version
+                    .as_ref()
+                    .unwrap();
+                cargo.use_ios_sim_sdk(&sdk, minimum_version)?;
             }
         }
         Ok(cargo)

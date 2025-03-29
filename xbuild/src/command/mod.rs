@@ -51,6 +51,7 @@ pub fn lldb(env: &BuildEnv) -> Result<()> {
         let executable = match target.platform() {
             Platform::Android => env.cargo_artefact(&cargo_dir, target, CrateType::Cdylib)?,
             Platform::Ios => env.output(),
+            Platform::IosSim => unimplemented!(),
             Platform::Linux => env.output().join(env.name()),
             Platform::Macos => env.executable(),
             Platform::Windows => todo!(),

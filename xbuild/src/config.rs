@@ -47,6 +47,7 @@ impl Config {
         let generic = match platform {
             Platform::Android => &self.android.generic,
             Platform::Ios => &self.ios.generic,
+            Platform::IosSim => &self.ios.generic,
             Platform::Macos => &self.macos.generic,
             Platform::Linux => &self.linux.generic,
             Platform::Windows => &self.windows.generic,
@@ -62,6 +63,7 @@ impl Config {
         let generic = match platform {
             Platform::Android => &self.android.generic,
             Platform::Ios => &self.ios.generic,
+            Platform::IosSim => &self.ios.generic,
             Platform::Macos => &self.macos.generic,
             Platform::Linux => &self.linux.generic,
             Platform::Windows => &self.windows.generic,
