@@ -145,10 +145,10 @@ impl<'a> DownloadManager<'a> {
             }
             Platform::Ios => {
                 self.ios_sdk()?;
-                if let Some(device) = self.env().target().device() {
-                    let (major, minor) = device.ios_product_version()?;
-                    self.developer_disk_image(major, minor)?;
-                }
+                // if let Some(device) = self.env().target().device() {
+                //     let (major, minor) = device.ios_product_version()?;
+                //     self.developer_disk_image(major, minor)?;
+                // }
             }
             _ => {}
         }
