@@ -265,6 +265,10 @@ pub fn build(env: &BuildEnv) -> Result<()> {
             if let Some(assets_car) = env.config().ios().assets_car.as_ref() {
                 app.add_file(assets_car, "Assets.car".as_ref())?;
             }
+
+            if let Some(assets) = env.config().ios().assets.as_ref() {
+                app.add_directory(assets, "assets".as_ref())?;
+            }
             app.finish(env.target().signer().cloned())?;
             if env.target().format() == Format::Ipa {
                 let app = arch_dir.join(format!("{}.app", env.name()));
