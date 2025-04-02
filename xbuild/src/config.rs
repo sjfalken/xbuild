@@ -26,7 +26,11 @@ impl Config {
             return Ok(Default::default());
         }
         let contents = std::fs::read_to_string(path.as_ref())?;
-        let config: RawConfig = serde_yaml::from_str(&contents)?;
+        Self::parse_from_str(&contents)
+    }
+
+    pub fn parse_from_str<S: Into<String>>(contents: S) -> Result<Self> {
+        let config: RawConfig = serde_yaml::from_str(&contents.into().as_str())?;
         Ok(Self {
             generic: config.generic.unwrap_or_default(),
             android: config.android.unwrap_or_default(),
@@ -36,7 +40,6 @@ impl Config {
             windows: config.windows.unwrap_or_default(),
         })
     }
-
     /// Selects a generic config value from [`GenericConfig`], platform-specific
     /// overrides first and otherwise falls back to a shared option in the root.
     pub fn select_generic<T: ?Sized>(
