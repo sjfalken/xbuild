@@ -638,7 +638,7 @@ impl BuildEnv {
     }
 
     pub fn ios_sdk(&self) -> PathBuf {
-        self.cache_dir().join("iPhoneOS.sdk")
+        self.cache_dir().join("iPhoneOS18.1.sdk")
     }
 
     pub fn developer_disk_image(&self, major: u32, minor: u32) -> PathBuf {
