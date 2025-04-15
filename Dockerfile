@@ -12,4 +12,7 @@ RUN apt-get install -y gnupg
 RUN wget -O - https://apt.llvm.org/llvm.sh | bash
 RUN ln -s -t /usr/local/bin /usr/lib/llvm-19/bin/*
 
+RUN apt-get install -y libasound2-dev
+RUN apt-get install -y squashfs-tools
+
 ENTRYPOINT [ "/app/target/release/x" ]
