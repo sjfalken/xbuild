@@ -1,0 +1,14 @@
+name: Package
+on:
+  push:
+jobs:
+  doPackage:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: |
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        docker build -t ghcr.io/sjfalken/xbuild:latest .
+        docker push ghcr.io/sjfalken/xbuild:latest
+            
+            
