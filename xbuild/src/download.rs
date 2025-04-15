@@ -193,18 +193,14 @@ impl WorkItem {
 impl WorkItem {
     const ORG: &'static str = "rust-mobile";
     const REPO: &'static str = "xbuild";
-    const VERSION: &'static str = "v0.1.0+3";
+    const VERSION: &'static str = "v0.2.1-alpha";
 
-    const IOS_ORG: &'static str = "xybp888";
-    const IOS_REPO: &'static str = "iOS-SDKs";
-    const IOS_VERSION: &'static str = "iOS18.1-SDKs";
+    // const IOS_ORG: &'static str = "xybp888";
+    // const IOS_REPO: &'static str = "iOS-SDKs";
+    // const IOS_VERSION: &'static str = "iOS18.1-SDKs";
 
     pub fn xbuild_release(output: PathBuf, artifact: &str) -> Self {
         Self::github_release(output, Self::ORG, Self::REPO, Self::VERSION, artifact)
-    }
-
-    pub fn xbuild_release_ios(output: PathBuf, artifact: &str) -> Self {
-        Self::github_release(output, Self::IOS_ORG, Self::IOS_REPO, Self::IOS_VERSION, artifact)
     }
 
     pub fn github_release(
@@ -287,7 +283,7 @@ impl DownloadManager<'_> {
 
     pub fn ios_sdk(&self) -> Result<()> {
         let output = self.env.ios_sdk();
-        let mut item = WorkItem::xbuild_release_ios(output, "iPhoneOS18.1.sdk.zip");
+        let mut item = WorkItem::xbuild_release(output, "iPhoneOS.sdk.tar.zst");
         if cfg!(target_os = "windows") {
             item.no_colons();
         }
